@@ -1,2 +1,8 @@
 rootProject.name='Cute Notes'
 include ':app'
+include ':feature-main'
+include ':core'
+include ':data'
+include ':domain'
+include ':components'
+include ':feature-notes'
