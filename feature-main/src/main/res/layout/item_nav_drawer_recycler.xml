@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/cl_background"
+	android:background="@drawable/nav_item_selector"
+	android:foreground="?attr/selectableItemBackground"
+	android:layout_width="match_parent"
+	android:layout_height="54dp">
+
+	<!-- SELECTED INDICATOR -->
+	<View
+		android:id="@+id/v_indicator"
+		android:layout_width="5dp"
+		android:layout_height="match_parent"
+		android:background="@color/navItemSelector"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
+
+	<!-- ICON -->
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/iv_icon"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:src="@drawable/ic_menu_camera_24dp"
+		app:layout_constraintStart_toEndOf="@id/v_indicator"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintBottom_toBottomOf="parent"
+		android:layout_marginStart="16dp"/>
+
+	<!-- LABEL -->
+	<androidx.appcompat.widget.AppCompatTextView
+		android:id="@+id/tv_label"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="16dp"
+		android:textColor="@color/navItemLabel"
+		android:textSize="16sp"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toEndOf="@id/iv_icon"
+		app:layout_constraintTop_toTopOf="parent"
+		android:text="@string/app_name" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

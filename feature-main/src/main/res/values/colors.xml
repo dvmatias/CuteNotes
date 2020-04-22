@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="navItemLabel">#FFFFFF</color>
+	<color name="navItemSelector">#7afbff</color>
+	<color name="navItemBackgroundSelected">#0AFFFFFF</color>
+	<color name="navItemBackgroundPressed">#1FFFFFFF</color>
+	<color name="navItemBackground">#00000000</color>
+</resources>

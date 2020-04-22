@@ -2,22 +2,26 @@ package com.cmdv.features.main.ui
 
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.view.Menu
-import android.view.View
+import android.view.*
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.cmdv.features.R
 import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationDrawerRecyclerAdapter.OnNavigationItemClickListener {
 
 	// Views.
 	private lateinit var drawerLayout: DrawerLayout
 	private lateinit var toolbar: Toolbar
 	private lateinit var navView: NavigationView
 	private lateinit var appBarMain: View
+	private lateinit var navRecycler: RecyclerView
+	private lateinit var navRecyclerAdapter: NavigationDrawerRecyclerAdapter
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -27,9 +31,11 @@ class MainActivity : AppCompatActivity() {
 		drawerLayout = findViewById(R.id.drawer_layout)
 		navView = findViewById(R.id.nav_view)
 		appBarMain = findViewById(R.id.app_bar_main)
+		navRecycler = (navView.findViewById(R.id.nav_content) as ViewGroup).findViewById(R.id.nav_recycler)
 
 		setSupportActionBar(toolbar)
 		setupDrawerLayout()
+		setupNavigationDrawerRecycler()
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -37,7 +43,6 @@ class MainActivity : AppCompatActivity() {
 		menuInflater.inflate(R.menu.main, menu)
 		return true
 	}
-
 
 	private fun setupDrawerLayout() {
 		val displayMetrics = DisplayMetrics()
@@ -56,6 +61,17 @@ class MainActivity : AppCompatActivity() {
 
 		drawerLayout.addDrawerListener(drawerToggle)
 		drawerToggle.syncState()
+		navView.setNavigationItemSelectedListener(null)
+	}
+
+	private fun setupNavigationDrawerRecycler() {
+		navRecycler.layoutManager = LinearLayoutManager(this)
+		this.navRecyclerAdapter = NavigationDrawerRecyclerAdapter(this, this)
+		navRecycler.adapter = this.navRecyclerAdapter
+	}
+
+	override fun onClick(item: NavigationDrawerRecyclerAdapter.NavigationItemModel, position: Int) {
+		this.navRecyclerAdapter.setSelected(position)
 	}
 
 }

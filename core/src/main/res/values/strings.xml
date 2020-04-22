@@ -9,6 +9,18 @@
 	<string name="nav_header_desc">Navigation header</string>
 	<string name="action_settings">Settings</string>
 
+	<string name="item_nav_notes">Notes</string>
+	<string name="item_nav_calendar">Calendar</string>
+	<string name="item_nav_archives">Archives</string>
+	<string name="item_nav_recycler_bin">Recycler Bin</string>
+	<string name="item_nav_settings">Settings</string>
+	<string name="item_nav_share">Share</string>
+
+	<string name="item_nav_notifications">Notifications</string>
+	<string name="item_nav_add">Add</string>
+	<string name="item_nav_like_fb">Like us</string>
+	<string name="item_nav_rate">Rate</string>
+
 	<string name="menu_home">Home</string>
 	<string name="menu_gallery">Gallery</string>
 	<string name="menu_slideshow">Slideshow</string>
