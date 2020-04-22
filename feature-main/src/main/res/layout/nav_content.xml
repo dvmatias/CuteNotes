@@ -10,7 +10,7 @@
 		android:id="@+id/nav_side_menu"
 		android:layout_width="72dp"
 		android:layout_height="0dp"
-		android:background="#E3E5E8"
+		android:background="@color/navSideMenuBackground"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toTopOf="parent">
@@ -26,14 +26,6 @@
 		android:background="#B6B7BA"
 		app:layout_constraintBottom_toBottomOf="parent" />
 
-	<androidx.recyclerview.widget.RecyclerView
-		android:id="@+id/nav_recycler"
-		android:layout_width="0dp"
-		android:layout_height="wrap_content"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toEndOf="@id/separator"
-		app:layout_constraintTop_toBottomOf="@id/nav_header" />
-
 	<include
 		android:id="@+id/nav_header"
 		layout="@layout/nav_header"
@@ -42,5 +34,13 @@
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toEndOf="@+id/separator"
 		app:layout_constraintTop_toTopOf="parent" />
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/nav_recycler"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toEndOf="@id/separator"
+		app:layout_constraintTop_toBottomOf="@id/nav_header" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

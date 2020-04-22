@@ -1,17 +1,19 @@
 package com.cmdv.features.main.ui
 
+import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cmdv.features.R
 import com.google.android.material.navigation.NavigationView
+
 
 class MainActivity : AppCompatActivity(), NavigationDrawerRecyclerAdapter.OnNavigationItemClickListener {
 
@@ -36,6 +38,16 @@ class MainActivity : AppCompatActivity(), NavigationDrawerRecyclerAdapter.OnNavi
 		setSupportActionBar(toolbar)
 		setupDrawerLayout()
 		setupNavigationDrawerRecycler()
+		setupStatusBar()
+	}
+
+	private fun setupStatusBar() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+			window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+		}
+		window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+		window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+		window.statusBarColor = ContextCompat.getColor(this, R.color.navSideMenuBackground)
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {
