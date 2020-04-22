@@ -7,15 +7,17 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.cmdv.features.R
 
-class NavigationDrawerRecyclerAdapter(val context: Context, private val listener: OnNavigationItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class NavigationDrawerRecyclerAdapter(
+	private val context: Context,
+	private val listener: OnNavigationItemClickListener
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-	var items: MutableList<NavigationItemModel> = mutableListOf()
+	private var items: MutableList<NavigationItemModel> = mutableListOf()
 
-	var selectedPosition = 0
+	private var selectedPosition = 0
 
 	init {
 		items.add(NavigationItemModel(true, R.drawable.ic_menu_camera_24dp, R.string.item_nav_notes))
@@ -58,7 +60,7 @@ class NavigationDrawerRecyclerAdapter(val context: Context, private val listener
 		private lateinit var context: Context
 		private lateinit var listener: OnNavigationItemClickListener
 		private var clBackground: ConstraintLayout = itemView.findViewById(R.id.cl_background)
-		private var vIndicator: View  = itemView.findViewById(R.id.v_indicator)
+		private var vIndicator: View = itemView.findViewById(R.id.v_indicator)
 		private var ivIcon: AppCompatImageView = itemView.findViewById(R.id.iv_icon)
 		private var tvLabel: AppCompatTextView = itemView.findViewById(R.id.tv_label)
 

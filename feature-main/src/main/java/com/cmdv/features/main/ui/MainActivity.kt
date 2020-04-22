@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity(), NavigationDrawerRecyclerAdapter.OnNavi
 		val displayMetrics = DisplayMetrics()
 		windowManager.defaultDisplay.getMetrics(displayMetrics)
 		val params = navView.layoutParams as DrawerLayout.LayoutParams
-		params.width = (displayMetrics.widthPixels * 0.8).toInt()
+		params.width = (displayMetrics.widthPixels * 0.85).toInt()
 		navView.layoutParams = params
 
 		val drawerToggle = object : ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
