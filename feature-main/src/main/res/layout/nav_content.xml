@@ -10,7 +10,7 @@
 		android:id="@+id/nav_side_menu"
 		android:layout_width="72dp"
 		android:layout_height="0dp"
-		android:background="@color/navSideMenuBackground"
+		android:background="@color/colorNavSideMenuBackground"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toTopOf="parent">

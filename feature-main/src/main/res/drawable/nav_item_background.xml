@@ -2,6 +2,6 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
 	android:shape="rectangle">
 
-	<solid android:color="@color/navItemBackground"/>
+	<solid android:color="@color/colorNavItemBackground"/>
 
 </shape>

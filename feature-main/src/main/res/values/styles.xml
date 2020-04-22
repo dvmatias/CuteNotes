@@ -10,4 +10,15 @@
 	<style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
 	<style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+	<style name="MainActivityTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+		<item name="android:windowContentTransitions">true</item>
+		<item name="windowActionBar">false</item>
+		<item name="windowNoTitle">true</item>
+	</style>
+
+	<style name="MainToolbarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+		<item name="android:textColorPrimary">@color/toolbarTextColorPrimary</item>
+		<item name="android:textColorSecondary">@color/toolbarTextColorSecondary</item>
+	</style>
 </resources>

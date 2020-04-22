@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity(), NavigationDrawerRecyclerAdapter.OnNavi
 		}
 		window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
 		window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-		window.statusBarColor = ContextCompat.getColor(this, R.color.navSideMenuBackground)
+		window.statusBarColor = ContextCompat.getColor(this, R.color.colorNavSideMenuBackground)
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {

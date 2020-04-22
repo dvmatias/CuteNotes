@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="colorNavSideMenuBackground">#E3E5E8</color>
+	<color name="colorNavItemLabel">#6C747F</color>
+	<color name="colorNavItemSelector">#7afbff</color>
+	<color name="colorNavItemBackgroundSelected">#0AFFFFFF</color>
+	<color name="colorNavItemBackgroundPressed">#1FFFFFFF</color>
+	<color name="colorNavItemBackground">#00000000</color>
+
+	<color name="toolbarTextColorPrimary">#69696B</color>
+	<color name="toolbarTextColorSecondary">#69696B</color>
+
+	<color name="colorWhite">#FFFFFF</color>
+</resources>

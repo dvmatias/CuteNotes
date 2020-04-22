@@ -12,7 +12,7 @@
 		android:id="@+id/v_indicator"
 		android:layout_width="5dp"
 		android:layout_height="match_parent"
-		android:background="@color/navItemSelector"
+		android:background="@color/colorNavItemSelector"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toTopOf="parent" />
@@ -34,7 +34,7 @@
 		android:layout_width="0dp"
 		android:layout_height="wrap_content"
 		android:layout_marginStart="16dp"
-		android:textColor="@color/navItemLabel"
+		android:textColor="@color/colorNavItemLabel"
 		android:textSize="16sp"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
