@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.*
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -35,6 +36,10 @@ class MainActivity : AppCompatActivity(), NavigationDrawerRecyclerAdapter.OnNavi
 		appBarMain = findViewById(R.id.app_bar_main)
 		navRecycler = (navView.findViewById(R.id.nav_content) as ViewGroup).findViewById(R.id.nav_recycler)
 
+		this.supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
+		supportActionBar?.setDisplayShowCustomEnabled(true)
+		supportActionBar?.setCustomView(R.layout.main_toolbar)
+
 		setSupportActionBar(toolbar)
 		setupDrawerLayout()
 		setupNavigationDrawerRecycler()
@@ -63,17 +68,17 @@ class MainActivity : AppCompatActivity(), NavigationDrawerRecyclerAdapter.OnNavi
 		params.width = (displayMetrics.widthPixels * 0.85).toInt()
 		navView.layoutParams = params
 
-		val drawerToggle = object : ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
-			override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
-				super.onDrawerSlide(drawerView, slideOffset)
-				val moveFactor: Float = navView.width * slideOffset
-				appBarMain.translationX = moveFactor
-			}
-		}
-
-		drawerLayout.addDrawerListener(drawerToggle)
-		drawerToggle.syncState()
-		navView.setNavigationItemSelectedListener(null)
+//		val drawerToggle = object : ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+//			override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+//				super.onDrawerSlide(drawerView, slideOffset)
+//				val moveFactor: Float = navView.width * slideOffset
+//				appBarMain.translationX = moveFactor
+//			}
+//		}
+//
+//		drawerLayout.addDrawerListener(drawerToggle)
+//		drawerToggle.syncState()
+//		navView.setNavigationItemSelectedListener(null)
 	}
 
 	private fun setupNavigationDrawerRecycler() {
