@@ -1,0 +1,37 @@
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:name="vector"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:name="path"
+        android:pathData="M 21.812 19.228 C 21.84 19.778 21.415 20.25 20.865 20.279 L 6.872 20.999 C 6.323 21.027 5.851 20.602 5.822 20.052 L 5.1 6.06 C 5.071 5.51 5.497 5.038 6.046 5.009 L 20.039 4.287 C 20.589 4.258 21.061 4.684 21.09 5.234 L 21.812 19.228 Z"
+        android:fillColor="@color/colorNavItemLabel"
+        android:strokeWidth="1.5"/>
+    <path
+        android:name="path_1"
+        android:pathData="M 21.812 19.228 C 21.84 19.778 21.415 20.25 20.865 20.279 L 6.872 20.999 C 6.323 21.027 5.851 20.602 5.822 20.052 L 5.1 6.06 C 5.071 5.51 5.497 5.038 6.046 5.009 L 20.039 4.287 C 20.589 4.258 21.061 4.684 21.09 5.234 L 21.812 19.228 Z"
+        android:strokeColor="@color/colorNavItemLabel"
+        android:strokeWidth="1.5"
+        android:strokeMiterLimit="10"/>
+    <path
+        android:name="path_2"
+        android:pathData="M 18.139 20.393 C 18.066 20.938 17.56 21.325 17.015 21.251 L 3.128 19.386 C 2.583 19.313 2.197 18.807 2.27 18.262 L 4.134 4.375 C 4.207 3.83 4.712 3.444 5.258 3.517 L 19.146 5.381 C 19.691 5.454 20.078 5.96 20.004 6.506 L 18.139 20.393 Z"
+        android:fillColor="@color/colorNavMenuBackground"
+        android:strokeWidth="1.5"/>
+    <path
+        android:name="path_3"
+        android:pathData="M 18.139 20.393 C 18.066 20.938 17.56 21.325 17.015 21.251 L 3.128 19.386 C 2.583 19.313 2.197 18.807 2.27 18.262 L 4.134 4.375 C 4.207 3.83 4.712 3.444 5.258 3.517 L 19.146 5.381 C 19.691 5.454 20.078 5.96 20.004 6.506 L 18.139 20.393 Z"
+        android:strokeColor="@color/colorNavItemLabel"
+        android:strokeWidth="1.5"
+        android:strokeMiterLimit="10"/>
+    <path
+        android:name="path_4"
+        android:pathData="M 11.271 4.179 C 11.271 3.316 11.97 2.616 12.834 2.616 C 13.696 2.616 14.397 3.316 14.397 4.179 L 14.397 8.505 C 14.397 9.368 13.697 10.068 12.834 10.068 C 11.971 10.068 11.271 9.368 11.271 8.505 L 11.271 6.639"
+        android:strokeColor="@color/colorNavItemLabel"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:strokeMiterLimit="10"/>
+</vector>

@@ -1,0 +1,25 @@
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:name="vector"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:name="path_1"
+        android:pathData="M 4.974 9.793 C 4.375 9.793 3.791 9.983 3.306 10.335 C 2.822 10.687 2.461 11.184 2.276 11.753 C 2.091 12.323 2.091 12.937 2.276 13.507 C 2.461 14.076 2.822 14.573 3.306 14.925 C 3.791 15.277 4.375 15.467 4.974 15.467 C 5.573 15.467 6.157 15.277 6.642 14.925 C 7.126 14.573 7.487 14.076 7.672 13.507 C 7.857 12.937 7.857 12.323 7.672 11.753 C 7.487 11.184 7.126 10.687 6.642 10.335 C 6.157 9.983 5.573 9.793 4.974 9.793 Z"
+        android:strokeColor="@color/colorNavItemLabel"
+        android:fillColor="@color/colorNavMenuBackground"
+        android:strokeWidth="1.5"
+        android:strokeMiterLimit="10"/>
+    <path
+        android:name="path_2"
+        android:pathData="M 18.349 14.583 C 17.607 14.583 16.883 14.818 16.283 15.254 C 15.682 15.691 15.235 16.306 15.006 17.012 C 14.777 17.718 14.777 18.478 15.006 19.184 C 15.235 19.89 15.682 20.505 16.283 20.942 C 16.883 21.378 17.607 21.613 18.349 21.613 C 19.281 21.613 20.176 21.242 20.834 20.583 C 21.493 19.925 21.864 19.03 21.864 18.098 C 21.864 17.166 21.493 16.271 20.834 15.613 C 20.176 14.954 19.281 14.583 18.349 14.583 Z M 15.581 2.387 C 14.649 2.387 13.754 2.758 13.096 3.417 C 12.437 4.075 12.066 4.97 12.066 5.902 C 12.066 6.834 12.437 7.729 13.096 8.387 C 13.754 9.046 14.649 9.417 15.581 9.417 C 16.513 9.417 17.408 9.046 18.066 8.387 C 18.725 7.729 19.096 6.834 19.096 5.902 C 19.096 4.97 18.725 4.075 18.066 3.417 C 17.408 2.758 16.513 2.387 15.581 2.387 Z"
+        android:fillColor="@color/colorNavItemLabel"/>
+    <path
+        android:name="path_3"
+        android:pathData="M 7.308 11.018 L 15.58 5.902 M 7.606 13.689 L 18.349 18.098"
+        android:strokeColor="@color/colorNavItemLabel"
+        android:strokeWidth="1.5"
+        android:strokeMiterLimit="10"/>
+</vector>

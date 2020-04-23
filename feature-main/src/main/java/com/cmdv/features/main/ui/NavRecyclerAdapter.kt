@@ -10,22 +10,22 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.cmdv.features.R
 
-class NavigationDrawerRecyclerAdapter(
+class NavRecyclerAdapter(
 	private val context: Context,
 	private val listener: OnNavigationItemClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-	private var items: MutableList<NavigationItemModel> = mutableListOf()
+	private var items: MutableList<NavItemModel> = mutableListOf()
 
 	private var selectedPosition = 0
 
 	init {
-		items.add(NavigationItemModel(true, R.drawable.ic_menu_camera_24dp, R.string.item_nav_notes))
-		items.add(NavigationItemModel(false, R.drawable.ic_menu_camera_24dp, R.string.item_nav_calendar))
-		items.add(NavigationItemModel(false, R.drawable.ic_menu_camera_24dp, R.string.item_nav_archives))
-		items.add(NavigationItemModel(false, R.drawable.ic_menu_camera_24dp, R.string.item_nav_recycler_bin))
-		items.add(NavigationItemModel(false, R.drawable.ic_menu_camera_24dp, R.string.item_nav_settings))
-		items.add(NavigationItemModel(false, R.drawable.ic_menu_camera_24dp, R.string.item_nav_share))
+		items.add(NavItemModel(true, R.drawable.ic_nav_notes_24dp, R.string.item_nav_notes))
+		items.add(NavItemModel(false, R.drawable.ic_nav_calendar_24dp, R.string.item_nav_calendar))
+		items.add(NavItemModel(false, R.drawable.ic_nav_archives_24dp, R.string.item_nav_archives))
+		items.add(NavItemModel(false, R.drawable.ic_nav_deleted_24dp, R.string.item_nav_deleted))
+		items.add(NavItemModel(false, R.drawable.ic_nav_settings_24dp, R.string.item_nav_settings))
+		items.add(NavItemModel(false, R.drawable.ic_nav_share_24dp, R.string.item_nav_share))
 	}
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -64,7 +64,7 @@ class NavigationDrawerRecyclerAdapter(
 		private var ivIcon: AppCompatImageView = itemView.findViewById(R.id.iv_icon)
 		private var tvLabel: AppCompatTextView = itemView.findViewById(R.id.tv_label)
 
-		fun bind(context: Context, listener: OnNavigationItemClickListener, item: NavigationItemModel, position: Int) {
+		fun bind(context: Context, listener: OnNavigationItemClickListener, item: NavItemModel, position: Int) {
 			this.listener = listener
 			this.context = context
 
@@ -73,7 +73,7 @@ class NavigationDrawerRecyclerAdapter(
 			itemView.setOnClickListener { listener.onClick(item, position) }
 		}
 
-		private fun setupItemUi(item: NavigationItemModel) {
+		private fun setupItemUi(item: NavItemModel) {
 			ivIcon.setImageResource(item.iconRes)
 			tvLabel.text = context.getString(item.labelRes)
 			when (item.isSelected) {
@@ -91,10 +91,10 @@ class NavigationDrawerRecyclerAdapter(
 	}
 
 	interface OnNavigationItemClickListener {
-		fun onClick(item: NavigationItemModel, position: Int)
+		fun onClick(item: NavItemModel, position: Int)
 	}
 
-	data class NavigationItemModel(
+	data class NavItemModel(
 		var isSelected: Boolean,
 		val iconRes: Int,
 		val labelRes: Int

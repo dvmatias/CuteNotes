@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.*
 import androidx.appcompat.app.ActionBar
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -16,7 +15,7 @@ import com.cmdv.features.R
 import com.google.android.material.navigation.NavigationView
 
 
-class MainActivity : AppCompatActivity(), NavigationDrawerRecyclerAdapter.OnNavigationItemClickListener {
+class MainActivity : AppCompatActivity(), NavRecyclerAdapter.OnNavigationItemClickListener {
 
 	// Views.
 	private lateinit var drawerLayout: DrawerLayout
@@ -24,7 +23,7 @@ class MainActivity : AppCompatActivity(), NavigationDrawerRecyclerAdapter.OnNavi
 	private lateinit var navView: NavigationView
 	private lateinit var appBarMain: View
 	private lateinit var navRecycler: RecyclerView
-	private lateinit var navRecyclerAdapter: NavigationDrawerRecyclerAdapter
+	private lateinit var navRecyclerAdapter: NavRecyclerAdapter
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -83,11 +82,11 @@ class MainActivity : AppCompatActivity(), NavigationDrawerRecyclerAdapter.OnNavi
 
 	private fun setupNavigationDrawerRecycler() {
 		navRecycler.layoutManager = LinearLayoutManager(this)
-		this.navRecyclerAdapter = NavigationDrawerRecyclerAdapter(this, this)
+		this.navRecyclerAdapter = NavRecyclerAdapter(this, this)
 		navRecycler.adapter = this.navRecyclerAdapter
 	}
 
-	override fun onClick(item: NavigationDrawerRecyclerAdapter.NavigationItemModel, position: Int) {
+	override fun onClick(item: NavRecyclerAdapter.NavItemModel, position: Int) {
 		this.navRecyclerAdapter.setSelected(position)
 	}
 
