@@ -20,7 +20,8 @@
 			android:background="@color/colorWhite"
 			app:popupTheme="@style/AppTheme.PopupOverlay"
 			app:theme="@style/MainToolbarTheme"
-			app:contentInsetStart="0dp">
+			app:contentInsetStart="0dp"
+			app:contentInsetStartWithNavigation="0dp">
 
 			<include layout="@layout/main_toolbar" />
 

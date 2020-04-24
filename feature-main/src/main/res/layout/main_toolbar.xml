@@ -8,25 +8,13 @@
 	tools:context=".main.ui.MainActivity">
 
 	<androidx.appcompat.widget.AppCompatImageView
-		android:id="@+id/iv_toggle"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginStart="16dp"
-		android:src="@drawable/ic_toolbar_toggle_24dp"
-		android:tint="#0F0F14"
-		app:layout_constraintBottom_toBottomOf="parent"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="parent" />
-
-	<androidx.appcompat.widget.AppCompatImageView
 		android:id="@+id/iv_toolbar_icon"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginStart="16dp"
 		android:src="@drawable/ic_toolbar_main_icon_24dp"
 		app:layout_constraintBottom_toBottomOf="parent"
 		android:tint="#807AA1"
-		app:layout_constraintStart_toEndOf="@id/iv_toggle"
+		app:layout_constraintStart_toStartOf="parent"
 		app:layout_constraintTop_toTopOf="parent" />
 
 	<androidx.appcompat.widget.AppCompatTextView

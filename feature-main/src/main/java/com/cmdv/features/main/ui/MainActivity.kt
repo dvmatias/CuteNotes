@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.*
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -41,7 +42,7 @@ class MainActivity : AppCompatActivity(), NavRecyclerAdapter.OnNavigationItemCli
 
 		setSupportActionBar(toolbar)
 		setupDrawerLayout()
-		setupNavigationDrawerRecycler()
+		setupNavRecycler()
 		setupStatusBar()
 	}
 
@@ -67,6 +68,8 @@ class MainActivity : AppCompatActivity(), NavRecyclerAdapter.OnNavigationItemCli
 		params.width = (displayMetrics.widthPixels * 0.85).toInt()
 		navView.layoutParams = params
 
+		val drawerToggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+
 //		val drawerToggle = object : ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
 //			override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
 //				super.onDrawerSlide(drawerView, slideOffset)
@@ -74,16 +77,18 @@ class MainActivity : AppCompatActivity(), NavRecyclerAdapter.OnNavigationItemCli
 //				appBarMain.translationX = moveFactor
 //			}
 //		}
-//
-//		drawerLayout.addDrawerListener(drawerToggle)
-//		drawerToggle.syncState()
-//		navView.setNavigationItemSelectedListener(null)
+
+		drawerLayout.addDrawerListener(drawerToggle)
+		drawerToggle.syncState()
+		navView.setNavigationItemSelectedListener(null)
 	}
 
-	private fun setupNavigationDrawerRecycler() {
+	private fun setupNavRecycler() {
 		navRecycler.layoutManager = LinearLayoutManager(this)
 		this.navRecyclerAdapter = NavRecyclerAdapter(this, this)
 		navRecycler.adapter = this.navRecyclerAdapter
+
+		navRecycler.addItemDecoration(NavRecyclerItemDecoration(this))
 	}
 
 	override fun onClick(item: NavRecyclerAdapter.NavItemModel, position: Int) {
