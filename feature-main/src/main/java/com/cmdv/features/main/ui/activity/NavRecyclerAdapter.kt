@@ -46,9 +46,11 @@ class NavRecyclerAdapter(
 	 *
 	 */
 	fun setSelected(newSelectedPosition: Int) {
-		if (selectedPosition == newSelectedPosition) return
+		val itemSelected = items[newSelectedPosition]
 
-		items[newSelectedPosition].isSelected = true
+		if (selectedPosition == newSelectedPosition || !itemSelected.isSelectable) return
+
+		itemSelected.isSelected = true
 		items[selectedPosition].isSelected = false
 		notifyDataSetChanged()
 

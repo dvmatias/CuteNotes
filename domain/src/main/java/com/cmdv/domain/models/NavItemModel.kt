@@ -5,4 +5,11 @@ data class NavItemModel(
 	val iconRes: Int,
 	val labelRes: Int,
 	val type: NavItemType
-)
+) {
+
+	val isSelectable: Boolean
+		get() {
+		return type.isSelectable
+	}
+
+}
