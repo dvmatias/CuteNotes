@@ -25,6 +25,7 @@ import com.cmdv.features.main.di.activity.MainActivitySubComponent
 import com.cmdv.features.main.ui.FeatureUiComponent
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import javax.inject.Inject
 
 
 class MainActivity :
@@ -37,10 +38,15 @@ class MainActivity :
 	private lateinit var navView: NavigationView
 	private lateinit var appBarMain: View
 	private lateinit var navRecycler: RecyclerView
-	private lateinit var navRecyclerAdapter: NavRecyclerAdapter
+
+	@Inject
+	lateinit var navRecyclerAdapter: NavRecyclerAdapter
+
+	@Inject
+	lateinit var navRecyclerItemDecoration: NavRecyclerItemDecoration
 
 	override fun bindComponent(): MainActivitySubComponent =
-		FeatureUiComponent.component.plus(MainActivityModule())
+		FeatureUiComponent.component.plus(MainActivityModule(this))
 
 	override fun bindLayout(): Int =
 		R.layout.activity_main
@@ -105,10 +111,9 @@ class MainActivity :
 
 	private fun setupNavRecycler() {
 		navRecycler.layoutManager = LinearLayoutManager(this)
-		this.navRecyclerAdapter = NavRecyclerAdapter(this, this)
-		navRecycler.adapter = this.navRecyclerAdapter
+		navRecycler.adapter = navRecyclerAdapter
 
-		navRecycler.addItemDecoration(NavRecyclerItemDecoration(this))
+		navRecycler.addItemDecoration(navRecyclerItemDecoration)
 	}
 
 	override fun onClick(item: NavItemModel, position: Int) {
