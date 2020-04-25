@@ -2,21 +2,29 @@ package com.cmdv.features.main.ui.activity
 
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.util.DisplayMetrics
-import android.view.*
+import android.view.Menu
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cmdv.core.base.mvp.BaseActivity
+import com.cmdv.domain.models.NavItemModel
+import com.cmdv.domain.models.NavItemType
 import com.cmdv.features.R
 import com.cmdv.features.main.di.activity.MainActivityModule
 import com.cmdv.features.main.di.activity.MainActivitySubComponent
 import com.cmdv.features.main.ui.FeatureUiComponent
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
 
 
 class MainActivity :
@@ -47,7 +55,6 @@ class MainActivity :
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		setContentView(R.layout.activity_main)
 
 		this.supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
 		supportActionBar?.setDisplayShowCustomEnabled(true)
@@ -104,8 +111,18 @@ class MainActivity :
 		navRecycler.addItemDecoration(NavRecyclerItemDecoration(this))
 	}
 
-	override fun onClick(item: NavRecyclerAdapter.NavItemModel, position: Int) {
+	override fun onClick(item: NavItemModel, position: Int) {
 		this.navRecyclerAdapter.setSelected(position)
+		onUserClickOnNavMenuItem(item.type)
+		Handler().postDelayed({ drawerLayout.closeDrawer(GravityCompat.START) }, 350)
+	}
+
+	/**
+	 * [MainActivityContract.View] implementation
+	 */
+	override fun onUserClickOnNavMenuItem(navItemType: NavItemType) {
+		Snackbar.make(drawerLayout, "$navItemType", Snackbar.LENGTH_LONG)
+			.show()
 	}
 
 }
