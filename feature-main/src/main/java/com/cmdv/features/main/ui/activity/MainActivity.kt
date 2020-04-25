@@ -1,4 +1,4 @@
-package com.cmdv.features.main.ui
+package com.cmdv.features.main.ui.activity
 
 import android.os.Build
 import android.os.Bundle
@@ -6,17 +6,22 @@ import android.util.DisplayMetrics
 import android.view.*
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.cmdv.core.base.mvp.BaseActivity
 import com.cmdv.features.R
+import com.cmdv.features.main.di.activity.MainActivityModule
+import com.cmdv.features.main.di.activity.MainActivitySubComponent
+import com.cmdv.features.main.ui.FeatureUiComponent
 import com.google.android.material.navigation.NavigationView
 
 
-class MainActivity : AppCompatActivity(), NavRecyclerAdapter.OnNavigationItemClickListener {
+class MainActivity :
+	BaseActivity<MainActivity, MainActivityPresenter, MainActivitySubComponent>(),
+	NavRecyclerAdapter.OnNavigationItemClickListener, MainActivityContract.View {
 
 	// Views.
 	private lateinit var drawerLayout: DrawerLayout
@@ -26,15 +31,23 @@ class MainActivity : AppCompatActivity(), NavRecyclerAdapter.OnNavigationItemCli
 	private lateinit var navRecycler: RecyclerView
 	private lateinit var navRecyclerAdapter: NavRecyclerAdapter
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		setContentView(R.layout.activity_main)
+	override fun bindComponent(): MainActivitySubComponent =
+		FeatureUiComponent.component!!.plus(MainActivityModule())
 
+	override fun bindLayout(): Int =
+		R.layout.activity_main
+
+	override fun bindViews() {
 		toolbar = findViewById(R.id.toolbar)
 		drawerLayout = findViewById(R.id.drawer_layout)
 		navView = findViewById(R.id.nav_view)
 		appBarMain = findViewById(R.id.app_bar_main)
 		navRecycler = (navView.findViewById(R.id.nav_content) as ViewGroup).findViewById(R.id.nav_recycler)
+	}
+
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		setContentView(R.layout.activity_main)
 
 		this.supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
 		supportActionBar?.setDisplayShowCustomEnabled(true)

@@ -1,4 +1,4 @@
-package com.cmdv.features.main.ui
+package com.cmdv.features.main.ui.activity
 
 import android.content.Context
 import android.graphics.Canvas

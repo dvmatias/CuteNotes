@@ -37,6 +37,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     // Kotlin
     implementation libs.kotlin
+    implementation libs.kotlinx
     // Dagger 2
     kapt libs.daggerCompiler
     implementation libs.dagger2
