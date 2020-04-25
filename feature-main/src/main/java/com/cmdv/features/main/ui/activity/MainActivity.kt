@@ -14,6 +14,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cmdv.core.base.mvp.BaseActivity
@@ -24,7 +26,6 @@ import com.cmdv.features.main.di.activity.MainActivityModule
 import com.cmdv.features.main.di.activity.MainActivitySubComponent
 import com.cmdv.features.main.ui.FeatureUiComponent
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
 
@@ -36,14 +37,17 @@ class MainActivity :
 	private lateinit var drawerLayout: DrawerLayout
 	private lateinit var toolbar: Toolbar
 	private lateinit var navView: NavigationView
-	private lateinit var appBarMain: View
 	private lateinit var navRecycler: RecyclerView
+	private lateinit var appBarMain: ViewGroup
+	private lateinit var contentMain: ViewGroup
 
 	@Inject
 	lateinit var navRecyclerAdapter: NavRecyclerAdapter
 
 	@Inject
 	lateinit var navRecyclerItemDecoration: NavRecyclerItemDecoration
+
+	private lateinit var navController: NavController
 
 	override fun bindComponent(): MainActivitySubComponent =
 		FeatureUiComponent.component.plus(MainActivityModule(this))
@@ -55,12 +59,15 @@ class MainActivity :
 		toolbar = findViewById(R.id.toolbar)
 		drawerLayout = findViewById(R.id.drawer_layout)
 		navView = findViewById(R.id.nav_view)
-		appBarMain = findViewById(R.id.app_bar_main)
 		navRecycler = (navView.findViewById(R.id.nav_content) as ViewGroup).findViewById(R.id.nav_recycler)
+		appBarMain = findViewById(R.id.app_bar_main)
+		contentMain = appBarMain.findViewById(R.id.content_main)
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+
+		navController = Navigation.findNavController(this, R.id.navigation_host_fragment)
 
 		this.supportActionBar?.displayOptions = ActionBar.DISPLAY_SHOW_CUSTOM
 		supportActionBar?.setDisplayShowCustomEnabled(true)
@@ -96,14 +103,6 @@ class MainActivity :
 
 		val drawerToggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
 
-//		val drawerToggle = object : ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
-//			override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
-//				super.onDrawerSlide(drawerView, slideOffset)
-//				val moveFactor: Float = navView.width * slideOffset
-//				appBarMain.translationX = moveFactor
-//			}
-//		}
-
 		drawerLayout.addDrawerListener(drawerToggle)
 		drawerToggle.syncState()
 		navView.setNavigationItemSelectedListener(null)
@@ -119,15 +118,20 @@ class MainActivity :
 	override fun onClick(item: NavItemModel, position: Int) {
 		this.navRecyclerAdapter.setSelected(position)
 		onUserClickOnNavMenuItem(item.type)
-		Handler().postDelayed({ drawerLayout.closeDrawer(GravityCompat.START) }, 350)
+		Handler().postDelayed({ drawerLayout.closeDrawer(GravityCompat.START) }, 200)
 	}
 
 	/**
 	 * [MainActivityContract.View] implementation
 	 */
 	override fun onUserClickOnNavMenuItem(navItemType: NavItemType) {
-		Snackbar.make(drawerLayout, "$navItemType", Snackbar.LENGTH_LONG)
-			.show()
+		when (navItemType) {
+			NavItemType.NOTES -> navController.navigate(R.id.notesFragment)
+			NavItemType.CALENDAR -> navController.navigate(R.id.calendarFragment)
+			NavItemType.ARCHIVES -> navController.navigate(R.id.archivesFragment)
+			NavItemType.DELETED -> navController.navigate(R.id.deletedFragment)
+			else -> navController.navigate(R.id.notesFragment)
+		}
 	}
 
 }
