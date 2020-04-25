@@ -32,7 +32,7 @@ class MainActivity :
 	private lateinit var navRecyclerAdapter: NavRecyclerAdapter
 
 	override fun bindComponent(): MainActivitySubComponent =
-		FeatureUiComponent.component!!.plus(MainActivityModule())
+		FeatureUiComponent.component.plus(MainActivityModule())
 
 	override fun bindLayout(): Int =
 		R.layout.activity_main

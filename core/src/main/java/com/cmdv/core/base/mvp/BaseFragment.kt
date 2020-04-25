@@ -18,6 +18,8 @@ abstract class BaseFragment<in V : BaseContract.View, P : BaseContract.Presenter
 
 	protected abstract fun bindLayout(): Int
 
+	protected abstract fun bindViews()
+
 	@Suppress("UNCHECKED_CAST")
 	override fun onCreate(savedInstanceState: Bundle?) {
 		bindComponent().inject(this as V)
@@ -25,6 +27,7 @@ abstract class BaseFragment<in V : BaseContract.View, P : BaseContract.Presenter
 	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+		bindViews()
 		return inflater.inflate(bindLayout(), container, ATTACH_TO_ROOT_FALSE)
 	}
 
