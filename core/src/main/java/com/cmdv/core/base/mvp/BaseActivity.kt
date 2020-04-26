@@ -23,12 +23,15 @@ abstract class BaseActivity<in V : BaseContract.View, P : BaseContract.Presenter
 
 	protected abstract fun bindViews()
 
+	protected abstract fun bindListeners()
+
 	@Suppress("UNCHECKED_CAST")
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		bindComponent().inject(this as V)
 		setContentView(layoutInflater.inflate(bindLayout(), ROOT))
 		bindViews()
+		bindListeners()
 
 		presenter.attachView(this as V)
 		presenter.create()

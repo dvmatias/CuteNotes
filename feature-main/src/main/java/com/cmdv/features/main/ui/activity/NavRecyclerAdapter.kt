@@ -8,6 +8,8 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.cmdv.domain.models.navitem.NavItemModel
+import com.cmdv.domain.models.navitem.NavItemType
 import com.cmdv.features.R
 
 class NavRecyclerAdapter(
@@ -20,12 +22,12 @@ class NavRecyclerAdapter(
 	private var selectedPosition = 0
 
 	init {
-		items.add(NavItemModel(true, R.drawable.ic_nav_notes_24dp, R.string.item_nav_notes))
-		items.add(NavItemModel(false, R.drawable.ic_nav_calendar_24dp, R.string.item_nav_calendar))
-		items.add(NavItemModel(false, R.drawable.ic_nav_archives_24dp, R.string.item_nav_archives))
-		items.add(NavItemModel(false, R.drawable.ic_nav_deleted_24dp, R.string.item_nav_deleted))
-		items.add(NavItemModel(false, R.drawable.ic_nav_settings_24dp, R.string.item_nav_settings))
-		items.add(NavItemModel(false, R.drawable.ic_nav_share_24dp, R.string.item_nav_share))
+		items.add(NavItemModel(true, R.drawable.ic_nav_notes_24dp, R.string.item_nav_notes, NavItemType.NOTES))
+		items.add(NavItemModel(false, R.drawable.ic_nav_calendar_24dp, R.string.item_nav_calendar, NavItemType.CALENDAR))
+		items.add(NavItemModel(false, R.drawable.ic_nav_archives_24dp, R.string.item_nav_archives, NavItemType.ARCHIVES))
+		items.add(NavItemModel(false, R.drawable.ic_nav_deleted_24dp, R.string.item_nav_deleted, NavItemType.DELETED))
+		items.add(NavItemModel(false, R.drawable.ic_nav_settings_24dp, R.string.item_nav_settings, NavItemType.SETTINGS))
+		items.add(NavItemModel(false, R.drawable.ic_nav_share_24dp, R.string.item_nav_share, NavItemType.SHARE))
 	}
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -44,13 +46,24 @@ class NavRecyclerAdapter(
 	 *
 	 */
 	fun setSelected(newSelectedPosition: Int) {
-		if (selectedPosition == newSelectedPosition) return
+		val itemSelected = items[newSelectedPosition]
+		val itemSelectedType = itemSelected.type
 
-		items[newSelectedPosition].isSelected = true
+		// Click on screen nav menu item
+		if (!itemSelected.isSelectable) {
+			listener.onNavSelectionScreen(itemSelectedType)
+			return
+		}
+		if (selectedPosition == newSelectedPosition) {
+			return
+		}
+
+		itemSelected.isSelected = true
 		items[selectedPosition].isSelected = false
 		notifyDataSetChanged()
 
 		selectedPosition = newSelectedPosition
+		listener.onNavSelectionChanged(itemSelectedType)
 	}
 
 	/********************************************************************************************************************************
@@ -70,7 +83,9 @@ class NavRecyclerAdapter(
 
 			setupItemUi(item)
 
-			itemView.setOnClickListener { listener.onClick(item, position) }
+			itemView.setOnClickListener {
+				listener.onNavItemClick(item, position)
+			}
 		}
 
 		private fun setupItemUi(item: NavItemModel) {
@@ -91,13 +106,13 @@ class NavRecyclerAdapter(
 	}
 
 	interface OnNavigationItemClickListener {
-		fun onClick(item: NavItemModel, position: Int)
-	}
 
-	data class NavItemModel(
-		var isSelected: Boolean,
-		val iconRes: Int,
-		val labelRes: Int
-	)
+		fun onNavItemClick(item: NavItemModel, position: Int)
+
+		fun onNavSelectionChanged(selectedNavItemType: NavItemType)
+
+		fun onNavSelectionScreen(selectedNavItemType: NavItemType)
+
+	}
 
 }

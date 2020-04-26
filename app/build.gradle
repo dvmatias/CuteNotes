@@ -29,7 +29,6 @@ android {
 dependencies {
     implementation project(path: ':core')
     implementation project(path: ':feature-main')
-    implementation project(path: ':feature-notes')
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     // Support
