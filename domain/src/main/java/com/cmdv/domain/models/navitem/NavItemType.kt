@@ -1,4 +1,4 @@
-package com.cmdv.domain.models
+package com.cmdv.domain.models.navitem
 
 enum class NavItemType(val isSelectable: Boolean) {
 	NOTES(true),

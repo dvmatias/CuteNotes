@@ -8,8 +8,8 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.cmdv.domain.models.NavItemModel
-import com.cmdv.domain.models.NavItemType
+import com.cmdv.domain.models.navitem.NavItemModel
+import com.cmdv.domain.models.navitem.NavItemType
 import com.cmdv.features.R
 
 class NavRecyclerAdapter(
@@ -47,14 +47,23 @@ class NavRecyclerAdapter(
 	 */
 	fun setSelected(newSelectedPosition: Int) {
 		val itemSelected = items[newSelectedPosition]
+		val itemSelectedType = itemSelected.type
 
-		if (selectedPosition == newSelectedPosition || !itemSelected.isSelectable) return
+		// Click on screen nav menu item
+		if (!itemSelected.isSelectable) {
+			listener.onNavSelectionScreen(itemSelectedType)
+			return
+		}
+		if (selectedPosition == newSelectedPosition) {
+			return
+		}
 
 		itemSelected.isSelected = true
 		items[selectedPosition].isSelected = false
 		notifyDataSetChanged()
 
 		selectedPosition = newSelectedPosition
+		listener.onNavSelectionChanged(itemSelectedType)
 	}
 
 	/********************************************************************************************************************************
@@ -74,7 +83,9 @@ class NavRecyclerAdapter(
 
 			setupItemUi(item)
 
-			itemView.setOnClickListener { listener.onClick(item, position) }
+			itemView.setOnClickListener {
+				listener.onNavItemClick(item, position)
+			}
 		}
 
 		private fun setupItemUi(item: NavItemModel) {
@@ -95,7 +106,13 @@ class NavRecyclerAdapter(
 	}
 
 	interface OnNavigationItemClickListener {
-		fun onClick(item: NavItemModel, position: Int)
+
+		fun onNavItemClick(item: NavItemModel, position: Int)
+
+		fun onNavSelectionChanged(selectedNavItemType: NavItemType)
+
+		fun onNavSelectionScreen(selectedNavItemType: NavItemType)
+
 	}
 
 }

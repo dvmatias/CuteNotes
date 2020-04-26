@@ -3,7 +3,7 @@
 	<color name="colorNavSideMenuBackground">#E3E5E8</color>
 	<color name="colorNavMenuBackground">#F2F3F5</color>
 	<color name="colorNavItemLabel">#6C747F</color>
-	<color name="colorNavItemSelector">#FF7B34FD</color>
+	<color name="colorNavItemSelector">#FE5E41</color>
 	<color name="colorNavItemBackgroundSelected">#0A000000</color>
 	<color name="colorNavItemBackgroundPressed">#05000000</color>
 	<color name="colorNavItemBackground">#00000000</color>

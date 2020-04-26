@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
@@ -19,12 +20,13 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cmdv.core.base.mvp.BaseActivity
-import com.cmdv.domain.models.NavItemModel
-import com.cmdv.domain.models.NavItemType
+import com.cmdv.domain.models.navitem.NavItemModel
+import com.cmdv.domain.models.navitem.NavItemType
 import com.cmdv.features.R
 import com.cmdv.features.main.di.activity.MainActivityModule
 import com.cmdv.features.main.di.activity.MainActivitySubComponent
 import com.cmdv.features.main.ui.FeatureUiComponent
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import javax.inject.Inject
 
@@ -40,6 +42,7 @@ class MainActivity :
 	private lateinit var navRecycler: RecyclerView
 	private lateinit var appBarMain: ViewGroup
 	private lateinit var contentMain: ViewGroup
+	private lateinit var fabAddNote: FloatingActionButton
 
 	@Inject
 	lateinit var navRecyclerAdapter: NavRecyclerAdapter
@@ -62,6 +65,11 @@ class MainActivity :
 		navRecycler = (navView.findViewById(R.id.nav_content) as ViewGroup).findViewById(R.id.nav_recycler)
 		appBarMain = findViewById(R.id.app_bar_main)
 		contentMain = appBarMain.findViewById(R.id.content_main)
+		fabAddNote = contentMain.findViewById(R.id.fab_add_note)
+	}
+
+	override fun bindListeners() {
+		fabAddNote.setOnClickListener { onUserClickOnAddButton() }
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -115,16 +123,28 @@ class MainActivity :
 		navRecycler.addItemDecoration(navRecyclerItemDecoration)
 	}
 
-	override fun onClick(item: NavItemModel, position: Int) {
-		this.navRecyclerAdapter.setSelected(position)
-		onUserClickOnNavMenuItem(item.type)
+	/**
+	 * [NavRecyclerAdapter.OnNavigationItemClickListener] implementation
+	 */
+
+	override fun onNavItemClick(item: NavItemModel, position: Int) {
+		navRecyclerAdapter.setSelected(position)
 		Handler().postDelayed({ drawerLayout.closeDrawer(GravityCompat.START) }, 200)
+	}
+
+	override fun onNavSelectionChanged(selectedNavItemType: NavItemType) {
+		onUserClickFragmentNavMenuItem(selectedNavItemType)
+	}
+
+	override fun onNavSelectionScreen(selectedNavItemType: NavItemType) {
+		onUserClickScreenNavMenuItem(selectedNavItemType)
 	}
 
 	/**
 	 * [MainActivityContract.View] implementation
 	 */
-	override fun onUserClickOnNavMenuItem(navItemType: NavItemType) {
+
+	override fun onUserClickFragmentNavMenuItem(navItemType: NavItemType) {
 		when (navItemType) {
 			NavItemType.NOTES -> navController.navigate(R.id.notesFragment)
 			NavItemType.CALENDAR -> navController.navigate(R.id.calendarFragment)
@@ -132,6 +152,18 @@ class MainActivity :
 			NavItemType.DELETED -> navController.navigate(R.id.deletedFragment)
 			else -> navController.navigate(R.id.notesFragment)
 		}
+	}
+
+	override fun onUserClickScreenNavMenuItem(navItemType: NavItemType) {
+		Toast.makeText(this, "Go to screen $navItemType!", Toast.LENGTH_SHORT).show()
+	}
+
+	override fun onUserClickOnAddButton() {
+		Toast.makeText(this, "Add!", Toast.LENGTH_SHORT).show()
+	}
+
+	override fun showAddButton(show: Boolean) {
+		// TODO
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.cmdv.domain.models
+package com.cmdv.domain.models.navitem
 
 data class NavItemModel(
 	var isSelected: Boolean,
