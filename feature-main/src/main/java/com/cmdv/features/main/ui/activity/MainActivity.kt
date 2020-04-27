@@ -87,6 +87,16 @@ class MainActivity :
 		setupStatusBar()
 	}
 
+	override fun onBackPressed() {
+		when (isDrawerOpen()) {
+			true -> closeDrawer()
+			else -> finish()
+		}
+	}
+
+	private fun isDrawerOpen(): Boolean =
+		drawerLayout.isDrawerOpen(GravityCompat.START)
+
 	private fun setupStatusBar() {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 			window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
@@ -129,7 +139,11 @@ class MainActivity :
 
 	override fun onNavItemClick(item: NavItemModel, position: Int) {
 		navRecyclerAdapter.setSelected(position)
-		Handler().postDelayed({ drawerLayout.closeDrawer(GravityCompat.START) }, 200)
+		Handler().postDelayed({ closeDrawer() }, 200)
+	}
+
+	private fun closeDrawer() {
+		drawerLayout.closeDrawer(GravityCompat.START)
 	}
 
 	override fun onNavSelectionChanged(selectedNavItemType: NavItemType) {
@@ -159,7 +173,7 @@ class MainActivity :
 	}
 
 	override fun onUserClickOnAddButton() {
-		Toast.makeText(this, "Add!", Toast.LENGTH_SHORT).show()
+		navigator.toCreateNote(this, null, null, false)
 	}
 
 	override fun showAddButton(show: Boolean) {

@@ -6,6 +6,6 @@ import androidx.core.app.ActivityOptionsCompat
 
 interface Navigator {
 
-	fun toSettings(activityOrigin: Activity, bundle: Bundle?, options: ActivityOptionsCompat?, finish: Boolean)
+	fun toCreateNote(activityOrigin: Activity, bundle: Bundle?, options: ActivityOptionsCompat?, finish: Boolean)
 
 }

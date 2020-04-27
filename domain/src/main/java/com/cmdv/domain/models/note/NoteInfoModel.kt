@@ -12,5 +12,5 @@ abstract class NoteInfoModel(
 	val creationDate: Date,
 	val updatedDate: Date,
 	val deadLineDate: Date?,
-	val remindDate: Date?
+	val reminder: Boolean
 )

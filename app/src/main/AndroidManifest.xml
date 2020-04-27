@@ -21,5 +21,10 @@
 			</intent-filter>
 		</activity>
 
+		<activity
+			android:name="com.cmdv.features.ui.activity.CreateNoteActivity"
+			android:label="@string/title_activity_create_note"
+			android:theme="@style/AppTheme.NoActionBar" />
+
 	</application>
 </manifest>
