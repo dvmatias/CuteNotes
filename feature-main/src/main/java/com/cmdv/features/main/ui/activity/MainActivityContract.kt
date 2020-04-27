@@ -1,13 +1,14 @@
 package com.cmdv.features.main.ui.activity
 
 import com.cmdv.core.base.mvp.BaseContract
+import com.cmdv.domain.models.navitem.NavItemModel
 import com.cmdv.domain.models.navitem.NavItemType
 
 interface MainActivityContract {
 
 	interface View : BaseContract.View {
 
-		fun onUserClickFragmentNavMenuItem(navItemType: NavItemType)
+		fun onUserClickFragmentNavMenuItem(itemSelected: NavItemModel)
 
 		fun onUserClickScreenNavMenuItem(navItemType: NavItemType)
 

@@ -16,7 +16,7 @@ class NavRecyclerItemDecoration(private val context: Context): RecyclerView.Item
 		val right = parent.width - parent.paddingRight - 40
 
 		for (i in 0 until parent.childCount) {
-			if (i == 3) {
+			if (i == 5 || i == 2) {
 				val child: View = parent.getChildAt(i)
 
 				val params: RecyclerView.LayoutParams = child.layoutParams as RecyclerView.LayoutParams
@@ -30,36 +30,3 @@ class NavRecyclerItemDecoration(private val context: Context): RecyclerView.Item
 		}
 	}
 }
-
-/*
-
-
-public class SimpleDividerItemDecoration extends RecyclerView.ItemDecoration {
-    private Drawable mDivider;
-
-    public SimpleDividerItemDecoration(Context context) {
-        mDivider = context.getResources().getDrawable(R.drawable.line_divider);
-    }
-
-    @Override
-    public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
-        int left = parent.getPaddingLeft();
-        int right = parent.getWidth() - parent.getPaddingRight();
-
-        int childCount = parent.getChildCount();
-        for (int i = 0; i < childCount; i++) {
-            View child = parent.getChildAt(i);
-
-            RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
-
-            int top = child.getBottom() + params.bottomMargin;
-            int bottom = top + mDivider.getIntrinsicHeight();
-
-            mDivider.setBounds(left, top, right, bottom);
-            mDivider.draw(c);
-        }
-    }
-}
-
-
- */

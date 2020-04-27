@@ -29,7 +29,7 @@ class CreateNoteActivity :
 	private lateinit var ivSave: AppCompatImageView
 	private lateinit var tvToolbarLabel: AppCompatTextView
 
-	private lateinit var noteType: String
+	private lateinit var noteType: NoteType
 
 	override fun bindComponent(): CreateNoteActivitySubComponent =
 		FeatureUiComponent.component.plus(CreateNoteActivityModule())
@@ -53,7 +53,7 @@ class CreateNoteActivity :
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 
-		noteType = intent.extras?.getString(EXTRA_NOTE_TYPE_KEY, "") ?: ""
+		noteType = intent.extras?.get(EXTRA_NOTE_TYPE_KEY) as (NoteType)
 
 		setSupportActionBar(toolbar)
 		setupStatusBar()
@@ -70,7 +70,14 @@ class CreateNoteActivity :
 	}
 
 	private fun setupToolbar() {
-		tvToolbarLabel.text = String.format(getString(R.string.toolbar_title), noteType)
+		tvToolbarLabel.text = String.format(
+			getString(R.string.placeholder_toolbar_title_create_note_activity),
+			when (noteType) {
+				NoteType.NOTE -> getString(R.string.note_type_note)
+				NoteType.TODO_LIST -> getString(R.string.note_type_todo_list)
+				NoteType.RECIPE -> getString(R.string.note_type_recipe)
+			}
+		)
 	}
 
 	/**

@@ -3,7 +3,7 @@ package com.cmdv.domain.models.navitem
 data class NavItemModel(
 	var isSelected: Boolean,
 	val iconRes: Int,
-	val labelRes: Int,
+	val label: String,
 	val type: NavItemType
 ) {
 

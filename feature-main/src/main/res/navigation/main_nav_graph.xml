@@ -26,4 +26,12 @@
 		android:label="fragment_deleted"
 		tools:layout="@layout/fragment_deleted" >
 	</fragment>
+	<fragment
+		android:id="@+id/recipesFragment"
+		android:name="com.cmdv.features.main.ui.recipes.RecipesFragment"
+		android:label="RecipesFragment" />
+	<fragment
+		android:id="@+id/todoListsFragment"
+		android:name="com.cmdv.features.main.ui.todolists.TodoListsFragment"
+		android:label="TodoListsFragment" />
 </navigation>

@@ -10,25 +10,28 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.cmdv.domain.models.navitem.NavItemModel
 import com.cmdv.domain.models.navitem.NavItemType
+import com.cmdv.domain.models.note.utils.NoteType
 import com.cmdv.features.R
+
+const val SELECTED_INDEX_INIT = -1
 
 class NavRecyclerAdapter(
 	private val context: Context,
 	private val listener: OnNavigationItemClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-	private var items: MutableList<NavItemModel> = mutableListOf()
+	private var items: ArrayList<NavItemModel> = arrayListOf(
+		NavItemModel(true, R.drawable.ic_nav_notes_24dp, context.getString(R.string.item_nav_notes), NavItemType.NOTES),
+		NavItemModel(false, R.drawable.ic_nav_todo_lists_24dp, context.getString(R.string.item_nav_todo_lists_label), NavItemType.TODO_LISTS),
+		NavItemModel(false, R.drawable.ic_nav_recipes_24dp, context.getString(R.string.item_nav_recipes_label), NavItemType.RECIPES),
+		NavItemModel(false, R.drawable.ic_nav_calendar_24dp, context.getString(R.string.item_nav_calendar_label), NavItemType.CALENDAR),
+		NavItemModel(false, R.drawable.ic_nav_archives_24dp, context.getString(R.string.item_nav_archives_label), NavItemType.ARCHIVES),
+		NavItemModel(false, R.drawable.ic_nav_deleted_24dp, context.getString(R.string.item_nav_deleted_label), NavItemType.DELETED),
+		NavItemModel(false, R.drawable.ic_nav_settings_24dp, context.getString(R.string.item_nav_settings_label), NavItemType.SETTINGS),
+		NavItemModel(false, R.drawable.ic_nav_share_24dp, context.getString(R.string.item_nav_share_label), NavItemType.SHARE)
+	)
 
-	private var selectedPosition = 0
-
-	init {
-		items.add(NavItemModel(true, R.drawable.ic_nav_notes_24dp, R.string.item_nav_notes, NavItemType.NOTES))
-		items.add(NavItemModel(false, R.drawable.ic_nav_calendar_24dp, R.string.item_nav_calendar, NavItemType.CALENDAR))
-		items.add(NavItemModel(false, R.drawable.ic_nav_archives_24dp, R.string.item_nav_archives, NavItemType.ARCHIVES))
-		items.add(NavItemModel(false, R.drawable.ic_nav_deleted_24dp, R.string.item_nav_deleted, NavItemType.DELETED))
-		items.add(NavItemModel(false, R.drawable.ic_nav_settings_24dp, R.string.item_nav_settings, NavItemType.SETTINGS))
-		items.add(NavItemModel(false, R.drawable.ic_nav_share_24dp, R.string.item_nav_share, NavItemType.SHARE))
-	}
+	private var selectedPosition: Int = SELECTED_INDEX_INIT
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 		val itemView: View = LayoutInflater.from(parent.context).inflate(R.layout.item_nav_drawer_recycler, parent, false)
@@ -59,12 +62,20 @@ class NavRecyclerAdapter(
 		}
 
 		itemSelected.isSelected = true
-		items[selectedPosition].isSelected = false
+		if (SELECTED_INDEX_INIT != selectedPosition) items[selectedPosition].isSelected = false
 		notifyDataSetChanged()
 
 		selectedPosition = newSelectedPosition
-		listener.onNavSelectionChanged(itemSelectedType)
+		listener.onNavSelectionChanged(itemSelected)
 	}
+
+	fun getSelectedNoteType(): NoteType? =
+		when (items[selectedPosition].type) {
+			NavItemType.NOTES -> NoteType.NOTE
+			NavItemType.TODO_LISTS -> NoteType.TODO_LIST
+			NavItemType.RECIPES -> NoteType.RECIPE
+			else -> null
+		}
 
 	/********************************************************************************************************************************
 	 *
@@ -90,7 +101,7 @@ class NavRecyclerAdapter(
 
 		private fun setupItemUi(item: NavItemModel) {
 			ivIcon.setImageResource(item.iconRes)
-			tvLabel.text = context.getString(item.labelRes)
+			tvLabel.text = item.label
 			when (item.isSelected) {
 				true -> {
 					vIndicator.visibility = View.VISIBLE
@@ -109,7 +120,7 @@ class NavRecyclerAdapter(
 
 		fun onNavItemClick(item: NavItemModel, position: Int)
 
-		fun onNavSelectionChanged(selectedNavItemType: NavItemType)
+		fun onNavSelectionChanged(itemSelected: NavItemModel)
 
 		fun onNavSelectionScreen(selectedNavItemType: NavItemType)
 

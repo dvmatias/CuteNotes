@@ -11,6 +11,8 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
@@ -19,6 +21,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.cmdv.core.EXTRA_NOTE_TYPE_KEY
 import com.cmdv.core.base.mvp.BaseActivity
 import com.cmdv.domain.models.navitem.NavItemModel
 import com.cmdv.domain.models.navitem.NavItemType
@@ -38,6 +41,9 @@ class MainActivity :
 	// Views.
 	private lateinit var drawerLayout: DrawerLayout
 	private lateinit var toolbar: Toolbar
+	private lateinit var mainToolbar: ViewGroup
+	private lateinit var tvToolbarLabel: AppCompatTextView
+	private lateinit var ivToolbarIcon: AppCompatImageView
 	private lateinit var navView: NavigationView
 	private lateinit var navRecycler: RecyclerView
 	private lateinit var appBarMain: ViewGroup
@@ -46,7 +52,6 @@ class MainActivity :
 
 	@Inject
 	lateinit var navRecyclerAdapter: NavRecyclerAdapter
-
 	@Inject
 	lateinit var navRecyclerItemDecoration: NavRecyclerItemDecoration
 
@@ -60,6 +65,9 @@ class MainActivity :
 
 	override fun bindViews() {
 		toolbar = findViewById(R.id.toolbar)
+		mainToolbar = toolbar.findViewById(R.id.main_toolbar)
+		tvToolbarLabel = mainToolbar.findViewById(R.id.tv_toolbar_label)
+		ivToolbarIcon = mainToolbar.findViewById(R.id.iv_toolbar_icon)
 		drawerLayout = findViewById(R.id.drawer_layout)
 		navView = findViewById(R.id.nav_view)
 		navRecycler = (navView.findViewById(R.id.nav_content) as ViewGroup).findViewById(R.id.nav_recycler)
@@ -131,6 +139,24 @@ class MainActivity :
 		navRecycler.adapter = navRecyclerAdapter
 
 		navRecycler.addItemDecoration(navRecyclerItemDecoration)
+		navRecyclerAdapter.setSelected(0)
+	}
+
+	private fun setupToolbar(itemSelected: NavItemModel) {
+		tvToolbarLabel.text = itemSelected.label
+		ivToolbarIcon.setImageDrawable(
+			getDrawable(
+				when (itemSelected.type) {
+					NavItemType.NOTES -> R.drawable.ic_nav_notes_24dp
+					NavItemType.TODO_LISTS -> R.drawable.ic_nav_todo_lists_24dp
+					NavItemType.RECIPES -> R.drawable.ic_nav_recipes_24dp
+					NavItemType.CALENDAR -> R.drawable.ic_nav_calendar_24dp
+					NavItemType.ARCHIVES -> R.drawable.ic_nav_archives_24dp
+					NavItemType.DELETED -> R.drawable.ic_nav_deleted_24dp
+					else -> R.drawable.ic_nav_notes_24dp
+				}
+			)
+		)
 	}
 
 	/**
@@ -146,8 +172,8 @@ class MainActivity :
 		drawerLayout.closeDrawer(GravityCompat.START)
 	}
 
-	override fun onNavSelectionChanged(selectedNavItemType: NavItemType) {
-		onUserClickFragmentNavMenuItem(selectedNavItemType)
+	override fun onNavSelectionChanged(itemSelected: NavItemModel) {
+		onUserClickFragmentNavMenuItem(itemSelected)
 	}
 
 	override fun onNavSelectionScreen(selectedNavItemType: NavItemType) {
@@ -158,14 +184,17 @@ class MainActivity :
 	 * [MainActivityContract.View] implementation
 	 */
 
-	override fun onUserClickFragmentNavMenuItem(navItemType: NavItemType) {
-		when (navItemType) {
+	override fun onUserClickFragmentNavMenuItem(itemSelected: NavItemModel) {
+		when (itemSelected.type) {
 			NavItemType.NOTES -> navController.navigate(R.id.notesFragment)
+			NavItemType.TODO_LISTS -> navController.navigate(R.id.todoListsFragment)
+			NavItemType.RECIPES -> navController.navigate(R.id.recipesFragment)
 			NavItemType.CALENDAR -> navController.navigate(R.id.calendarFragment)
 			NavItemType.ARCHIVES -> navController.navigate(R.id.archivesFragment)
 			NavItemType.DELETED -> navController.navigate(R.id.deletedFragment)
 			else -> navController.navigate(R.id.notesFragment)
 		}
+		setupToolbar(itemSelected)
 	}
 
 	override fun onUserClickScreenNavMenuItem(navItemType: NavItemType) {
@@ -173,7 +202,9 @@ class MainActivity :
 	}
 
 	override fun onUserClickOnAddButton() {
-		navigator.toCreateNote(this, null, null, false)
+		val bundle = Bundle()
+		bundle.putSerializable(EXTRA_NOTE_TYPE_KEY, navRecyclerAdapter.getSelectedNoteType())
+		navigator.toCreateNote(this, bundle, null, false)
 	}
 
 	override fun showAddButton(show: Boolean) {
