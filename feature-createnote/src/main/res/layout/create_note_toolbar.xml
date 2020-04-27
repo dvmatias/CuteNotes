@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="54dp"
+	android:background="@color/colorWhite"
+	tools:context=".ui.activity.CreateNoteActivity">
+
+   <!-- ICON CANCEL -->
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/iv_toolbar_cancel"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:src="@drawable/ic_cancel_black_24dp"
+		app:layout_constraintBottom_toBottomOf="parent"
+		android:layout_marginStart="16dp"
+		android:tint="#807AA1"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
+
+	<!-- NOTE TITLE -->
+	<androidx.appcompat.widget.AppCompatTextView
+		android:id="@+id/tv_toolbar_label"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="8dp"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintStart_toEndOf="@id/iv_toolbar_cancel"
+		app:layout_constraintTop_toTopOf="parent"
+		android:textSize="20sp"
+		android:textStyle="bold"
+		android:textColor="#0F0F14"
+		android:text="Create your Note"/>
+
+	<!-- ICON SAVE -->
+	<androidx.appcompat.widget.AppCompatImageView
+		android:id="@+id/iv_toolbar_save"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:src="@drawable/ic_save_black_24dp"
+		app:layout_constraintBottom_toBottomOf="parent"
+		android:layout_marginEnd="16dp"
+		android:tint="#807AA1"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

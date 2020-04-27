@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string name="toolbar_title">Create your %s</string>
+	<string name="note">Note</string>
+	<string name="check_list">TODO List</string>
+	<string name="recipe">Recipe</string>
+
+</resources>

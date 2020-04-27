@@ -1,23 +1,88 @@
 package com.cmdv.features.ui.activity
 
+import android.os.Build
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
+import android.view.WindowManager
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
+import com.cmdv.core.EXTRA_NOTE_TYPE_KEY
+import com.cmdv.core.base.mvp.BaseActivity
+import com.cmdv.domain.models.note.utils.NoteType
 import com.cmdv.features.R
-
+import com.cmdv.features.di.activity.CreateNoteActivityModule
+import com.cmdv.features.di.activity.CreateNoteActivitySubComponent
+import com.cmdv.features.ui.FeatureUiComponent
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_create_note.*
 
-class CreateNoteActivity : AppCompatActivity() {
+class CreateNoteActivity :
+	BaseActivity<CreateNoteActivity, CreateNoteActivityPresenter, CreateNoteActivitySubComponent>(),
+	CreateNoteActivityContract.View {
+
+	// Views.
+	private lateinit var toolbar: Toolbar
+	private lateinit var createNoteToolbar: View
+	private lateinit var ivCancel: AppCompatImageView
+	private lateinit var ivSave: AppCompatImageView
+	private lateinit var tvToolbarLabel: AppCompatTextView
+
+	private lateinit var noteType: String
+
+	override fun bindComponent(): CreateNoteActivitySubComponent =
+		FeatureUiComponent.component.plus(CreateNoteActivityModule())
+
+	override fun bindLayout(): Int =
+		R.layout.activity_create_note
+
+	override fun bindViews() {
+		toolbar = findViewById(R.id.toolbar)
+		createNoteToolbar = toolbar.findViewById(R.id.create_note_toolbar)
+		ivCancel = createNoteToolbar.findViewById(R.id.iv_toolbar_cancel)
+		ivSave = createNoteToolbar.findViewById(R.id.iv_toolbar_save)
+		tvToolbarLabel = createNoteToolbar.findViewById(R.id.tv_toolbar_label)
+	}
+
+	override fun bindListeners() {
+		ivCancel.setOnClickListener { onUserClickCancel() }
+		ivSave.setOnClickListener { onUserClickSave() }
+	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		setContentView(R.layout.activity_create_note)
-		setSupportActionBar(toolbar)
 
-		fab.setOnClickListener { view ->
-			Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-				.setAction("Action", null).show()
+		noteType = intent.extras?.getString(EXTRA_NOTE_TYPE_KEY, "") ?: ""
+
+		setSupportActionBar(toolbar)
+		setupStatusBar()
+		setupToolbar()
+	}
+
+	private fun setupStatusBar() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+			window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 		}
+		window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+		window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+		window.statusBarColor = ContextCompat.getColor(this, R.color.colorNavSideMenuBackground)
+	}
+
+	private fun setupToolbar() {
+		tvToolbarLabel.text = String.format(getString(R.string.toolbar_title), noteType)
+	}
+
+	/**
+	 * [CreateNoteActivityContract.View] implementation.
+	 */
+
+	override fun onUserClickCancel() {
+		Snackbar.make(coordinatorLayout, "Cancel note creation", 500).show()
+	}
+
+	override fun onUserClickSave() {
+		Snackbar.make(coordinatorLayout, "Save Note", 500).show()
 	}
 
 }
