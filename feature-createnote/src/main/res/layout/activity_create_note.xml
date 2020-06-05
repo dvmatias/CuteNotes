@@ -8,30 +8,32 @@
 	android:background="@color/colorWhite"
 	tools:context="com.cmdv.features.ui.activity.CreateNoteActivity">
 
-	<com.google.android.material.appbar.AppBarLayout
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:theme="@style/AppTheme.AppBarOverlay"
-		app:elevation="0dp">
-
-		<androidx.appcompat.widget.Toolbar
-			android:id="@+id/toolbar"
+		<com.google.android.material.appbar.AppBarLayout
 			android:layout_width="match_parent"
-			android:layout_height="?attr/actionBarSize"
-			android:background="@color/colorWhite"
-			app:contentInsetStart="0dp"
-			app:contentInsetStartWithNavigation="0dp"
-			app:popupTheme="@style/AppTheme.PopupOverlay"
-			app:theme="@style/MainToolbarTheme">
+			android:layout_height="wrap_content"
+			android:theme="@style/AppTheme.AppBarOverlay"
+			app:elevation="0dp">
 
-			<include
-				android:id="@+id/create_note_toolbar"
-				layout="@layout/create_note_toolbar" />
+			<androidx.appcompat.widget.Toolbar
+				android:id="@+id/toolbar"
+				android:layout_width="match_parent"
+				android:layout_height="?attr/actionBarSize"
+				android:background="@color/colorToolbarBackground"
+				app:contentInsetStart="0dp"
+				app:contentInsetStartWithNavigation="0dp"
+				app:popupTheme="@style/AppTheme.PopupOverlay"
+				app:theme="@style/MainToolbarTheme">
 
-		</androidx.appcompat.widget.Toolbar>
+				<include
+					android:id="@+id/create_note_toolbar"
+					layout="@layout/create_note_toolbar" />
 
-	</com.google.android.material.appbar.AppBarLayout>
+			</androidx.appcompat.widget.Toolbar>
 
-	<include layout="@layout/content_create_note" />
+		</com.google.android.material.appbar.AppBarLayout>
+
+		<include
+			android:id="@+id/content_create_note"
+			layout="@layout/content_create_note" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

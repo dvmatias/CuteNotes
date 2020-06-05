@@ -29,4 +29,11 @@
 	<string name="item_nav_add">Add</string>
 	<string name="item_nav_like_fb">Like us</string>
 	<string name="item_nav_rate">Rate</string>
+
+	<string-array name="note_priorities">
+		<item>Low</item>
+		<item>Medium</item>
+		<item>High</item>
+		<item>Urgent</item>
+	</string-array>
 </resources>

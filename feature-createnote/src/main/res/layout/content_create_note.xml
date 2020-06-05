@@ -1,9 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	app:layout_behavior="@string/appbar_scrolling_view_behavior">
+	android:layout_height="wrap_content"
+	xmlns:tools="http://schemas.android.com/tools"
+	app:layout_behavior="@string/appbar_scrolling_view_behavior"
+	tools:showIn="@layout/activity_create_note">
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingStart="16dp"
+		android:paddingEnd="16dp" >
+
+		<androidx.appcompat.widget.AppCompatTextView
+			android:id="@+id/tv_title_label"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:ems="5"
+			android:textSize="14sp"
+			android:textColor="#6A6A6A"
+			android:layout_marginTop="16dp"
+			android:layout_marginBottom="16dp"
+			android:fontFamily="@font/geomantis_bold"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintBottom_toTopOf="@id/separator_1"
+			android:text="TITLE"/>
+
+		<androidx.appcompat.widget.AppCompatEditText
+			android:id="@+id/et_title_input"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:text="Title"
+			android:textSize="24sp"
+			android:fontFamily="@font/geomantis_medium"
+			android:background="@color/colorTransparent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toEndOf="@id/tv_title_label"
+			app:layout_constraintBaseline_toBaselineOf="@id/tv_title_label"/>
+
+		<View
+			android:id="@+id/separator_1"
+			android:layout_width="match_parent"
+			android:layout_height="0.5dp"
+			android:background="#CACACA"
+			android:layout_marginTop="16dp"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/et_title_input"/>
+
+		<androidx.appcompat.widget.AppCompatTextView
+			android:id="@+id/tv_subtitle_label"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:ems="5"
+			android:textSize="14sp"
+			android:textColor="#6A6A6A"
+			android:layout_marginTop="16dp"
+			android:layout_marginBottom="16dp"
+			android:fontFamily="@font/geomantis_bold"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/separator_1"
+			app:layout_constraintBottom_toTopOf="@id/separator_2"
+			android:text="SUBTITLE"/>
+
+		<androidx.appcompat.widget.AppCompatEditText
+			android:id="@+id/et_subtitle_input"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:text="Subtitle"
+			android:textSize="20sp"
+			android:fontFamily="@font/geomantis_book"
+			android:background="@color/colorTransparent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toEndOf="@id/tv_subtitle_label"
+			app:layout_constraintBaseline_toBaselineOf="@id/tv_subtitle_label"/>
+
+		<View
+			android:id="@+id/separator_2"
+			android:layout_width="match_parent"
+			android:layout_height="0.5dp"
+			android:background="#CACACA"
+			android:layout_marginTop="16dp"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/et_subtitle_input"/>
+
+		<androidx.appcompat.widget.AppCompatTextView
+			android:id="@+id/tv_priority_label"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:ems="5"
+			android:textSize="14sp"
+			android:textColor="#6A6A6A"
+			android:layout_marginTop="16dp"
+			android:layout_marginBottom="16dp"
+			app:layout_constraintStart_toStartOf="parent"
+			android:fontFamily="@font/geomantis_bold"
+			app:layout_constraintTop_toBottomOf="@id/separator_2"
+			app:layout_constraintBottom_toTopOf="@id/separator_3"
+			android:text="PRIORITY"/>
+
+		<androidx.appcompat.widget.AppCompatSpinner
+			android:id="@+id/spinner_priority"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:fontFamily="@font/geomantis_book"
+			android:textSize="20sp"
+			app:layout_constraintBottom_toBottomOf="@id/tv_priority_label"
+			app:layout_constraintTop_toTopOf="@id/tv_priority_label"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toEndOf="@id/tv_priority_label" />
+
+		<View
+			android:id="@+id/separator_3"
+			android:layout_width="match_parent"
+			android:layout_height="0.5dp"
+			android:background="#CACACA"
+			android:layout_marginTop="16dp"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/tv_priority_label"/>
+
+		<androidx.appcompat.widget.AppCompatTextView
+			android:id="@+id/tv_note_label"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:ems="5"
+			android:textSize="14sp"
+			android:textColor="#6A6A6A"
+			android:layout_marginTop="16dp"
+			android:layout_marginBottom="16dp"
+			android:fontFamily="@font/geomantis_bold"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/separator_3"
+			android:text="NOTE"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+		<androidx.appcompat.widget.AppCompatEditText
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/tv_note_label"/>
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
+
+<!--
+
+	val title: String,
+	val subtitle: String?,
+	val category: NoteCategory,
+	val priority: NotePriority,
+	val creationDate: Date,
+	val updatedDate: Date,
+	val deadLineDate: Date?,
+	val reminder: Boolean
+
+-->

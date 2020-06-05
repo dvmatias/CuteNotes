@@ -31,6 +31,7 @@ import com.cmdv.features.main.di.activity.MainActivitySubComponent
 import com.cmdv.features.main.ui.FeatureUiComponent
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
+import java.util.concurrent.atomic.AtomicReference
 import javax.inject.Inject
 
 
@@ -111,7 +112,7 @@ class MainActivity :
 		}
 		window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
 		window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-		window.statusBarColor = ContextCompat.getColor(this, R.color.colorNavSideMenuBackground)
+		window.statusBarColor = ContextCompat.getColor(this, R.color.colorStatusBar)
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {

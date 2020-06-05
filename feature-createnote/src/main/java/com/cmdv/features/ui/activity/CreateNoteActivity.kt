@@ -4,7 +4,9 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import android.widget.ArrayAdapter
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatSpinner
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -28,6 +30,8 @@ class CreateNoteActivity :
 	private lateinit var ivCancel: AppCompatImageView
 	private lateinit var ivSave: AppCompatImageView
 	private lateinit var tvToolbarLabel: AppCompatTextView
+	private lateinit var contentCreateNote: View
+	private lateinit var spinnerPriority: AppCompatSpinner
 
 	private lateinit var noteType: NoteType
 
@@ -43,6 +47,9 @@ class CreateNoteActivity :
 		ivCancel = createNoteToolbar.findViewById(R.id.iv_toolbar_cancel)
 		ivSave = createNoteToolbar.findViewById(R.id.iv_toolbar_save)
 		tvToolbarLabel = createNoteToolbar.findViewById(R.id.tv_toolbar_label)
+		contentCreateNote = findViewById(R.id.content_create_note)
+		spinnerPriority = contentCreateNote.findViewById(R.id.spinner_priority)
+
 	}
 
 	override fun bindListeners() {
@@ -58,6 +65,7 @@ class CreateNoteActivity :
 		setSupportActionBar(toolbar)
 		setupStatusBar()
 		setupToolbar()
+		setupSpinnerPriority()
 	}
 
 	private fun setupStatusBar() {
@@ -66,7 +74,7 @@ class CreateNoteActivity :
 		}
 		window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
 		window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-		window.statusBarColor = ContextCompat.getColor(this, R.color.colorNavSideMenuBackground)
+		window.statusBarColor = ContextCompat.getColor(this, R.color.colorStatusBar)
 	}
 
 	private fun setupToolbar() {
@@ -79,6 +87,14 @@ class CreateNoteActivity :
 			}
 		)
 	}
+
+	private fun setupSpinnerPriority() {
+		val priorities = resources.getStringArray(R.array.note_priorities)
+		val adapter = ArrayAdapter(this,
+			android.R.layout.simple_spinner_item, priorities)
+		spinnerPriority.adapter = adapter
+	}
+
 
 	/**
 	 * [CreateNoteActivityContract.View] implementation.

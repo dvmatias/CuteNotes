@@ -22,7 +22,7 @@
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:srcCompat="@drawable/ic_add_white_24dp"
 		app:layout_constraintEnd_toEndOf="parent"
-		app:backgroundTint="#9961FF"
+		app:backgroundTint="@color/colorAccent"
 		android:layout_marginEnd="16dp"
 		android:layout_marginBottom="16dp"/>
 
