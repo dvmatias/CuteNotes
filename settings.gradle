@@ -1,4 +1,3 @@
-rootProject.name='Cute Notes'
 include ':app'
 include ':feature-main'
 include ':core'
